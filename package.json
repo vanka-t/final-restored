@@ -1,0 +1,26 @@
+{
+  "name": "final-restored",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sketch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanka-t/final-restored.git"
+  },
+  "keywords": [
+    "game",
+    "ml5"
+  ],
+  "author": "Vanessa Tershana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vanka-t/final-restored/issues"
+  },
+  "homepage": "https://github.com/vanka-t/final-restored#readme",
+  "dependencies": {
+    "ml5": "^1.0.0"
+  }
+}
