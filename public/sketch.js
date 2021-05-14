@@ -6,12 +6,17 @@ var locked = false; //
 var backgroundIcon, scoreIcon, playerIcon, barIcon, enemyIcon; //IMAGES
 var gameOverIcon, tryAgainIcon, cursorIcon;
 
+var enemyGroup, scoreGroup, barGroup; //SPRITE GROUPS
+var enemies = [];
+var enemies2 = [];
+var enemies3 = [];
 
 var ww = 1000;
 var hh = 500;
 var xPos = ww/2; //controlling position for all text icons
 var yPos = hh/2;
 var myFont;
+var points = 0;
 
 //BUTTON SETTINGS
 var xOffset, yOffset, overButton, locked, buttonSizeX, buttonSizeY; //adjustments for mousePressed for buttonYes/No
@@ -20,7 +25,7 @@ buttonSizeY = 100;
 xOffset = 0.0;
 yOffset = 0.0;
 
-var player, enemy;
+var player, enemy1, enemy2,enemy3;
 
 function preload(){
     backgroundIcon = loadImage("images/background.jpg");//icons
@@ -48,7 +53,7 @@ function setup() {
    enemyGroup = new Group();
   scoreGroup = new Group();
   
-  scoreIcon.resize(20,20);
+  scoreIcon.resize(20,20); //RESIZING ICONS
   cursorIcon.resize(40,40);
   playerIcon.resize(100,75);
   barIcon.resize(150,50);
@@ -57,8 +62,19 @@ function setup() {
   tryAgainIcon.resize(buttonSizeX,buttonSizeY);
   console.log("ome");
   
-  playerSprite = createSprite(50,hh-75);
+  playerSprite = createSprite(50,hh-75); //INTRODUCING PLAYER SPRITE
   playerSprite.addImage(playerIcon);
+
+
+  scoreGroup = new Group();
+
+  enemyGroup = new Group(); //INTRODUCING ENEMY SPRITE
+  for(var i = 0; i<height-100; i+=55) { 
+    enemySprite = createSprite(0,i);
+   enemySprite.addImage(enemyIcon);
+   enemyGroup.add(enemySprite);
+ }
+
 
   //TEXT SETTINGS
 textSize(50);
@@ -67,17 +83,36 @@ textFont(myFont);
 textAlign(CENTER);
 
 player = new PlayerSettings();
-enemy = new EnemySettings();
+// enemy1 = new EnemySettings();
+// enemy2 = new EnemySettings();
+// enemy3 = new EnemySettings();
+// enemy4 = new EnemySettings();
   }
   
   function draw() {
+      //ENEMY COMMANDS
+  if(random(1) <0.01){ //spikes showing up irregularly -->decimal value = probability of bar showing up
+enemies.push(new EnemySettings());
+ }
+ if(random(1) <0.01){ //spikes showing up irregularly -->decimal value = probability of bar showing up
+    enemies2.push(new EnemySettings());
+ }
+ if(random(1) <0.01){ //spikes showing up irregularly -->decimal value = probability of bar showing up
+    enemies3.push(new EnemySettings());
+ }
+
+
   //START COMMANDS
   background(backgroundIcon);
+  //CALLING ON TEXT
   fill(255);
   textSize(35);
+  text("Score      " + points, 100,50);
 
   player.show();
   player.move();
+  player.stop();
+  //PLAYER COMMANDS
   if(keyDown('d')){
     player.right();
   } else if (keyDown('a')){
@@ -85,6 +120,23 @@ enemy = new EnemySettings();
   } else if (keyDown('w')){
   player.jump();
   }
+
+for (let e of enemies){
+    e.show();
+    e.move();
+}
+
+for (let e of enemies2){
+    e.show2();
+    e.move2();
+}
+
+for (let e of enemies3){
+    e.show3();
+    e.move3();
+}
+
+
 }
   
 

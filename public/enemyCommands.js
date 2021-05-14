@@ -7,37 +7,49 @@ class EnemySettings{
     }
 
     show(){
-        image(enemyIcon,this.x,this.y);
+        drawSprite(enemySprite);
+        enemySprite.position.x = this.x;
+        enemySprite.position.y = this.y;
     }
 
     show2(){
-        image(enemyIcon,this.x+200,this.y);
+        drawSprite(enemySprite);
+        enemySprite.position.x = this.x + 200;
+        enemySprite.position.y = this.y;
     }
 
     show3(){
-        image(enemyIcon,this.x+300,this.y);
+        drawSprite(enemySprite);
+        enemySprite.position.x = this.x + 400;
+        enemySprite.position.y = this.y;
+    }
+
+    show4(){
+        drawSprite(enemySprite);
+        enemySprite.position.x = this.x + 650;
+        enemySprite.position.y = this.y;
     }
 
     move(){
         this.y +=5;
-        this.x +=10
-        this.direction += 2;
+       // this.x +=10
+       // this.direction += 2;
     }
 
     move2(){
         this.y +=5.5;
-        this.direction += 2;
+        //this.direction += 2;
     }
 
     move3(){
         this.y +=4.5;
-        this.direction += 2;
+     //   this.direction += 2;
     }
 
-//     yspeed += 5
-//     image(enemyIcon,this.x,this.y);
-//     enemy = createSprite(600, 200, 50, 100);
-//   enemy.addImage(enemyIcon);
+    move4(){
+        this.y +=6.5;
+     //   this.direction += 2;
+    }
 
 
     
