@@ -20,7 +20,7 @@ buttonSizeY = 100;
 xOffset = 0.0;
 yOffset = 0.0;
 
-
+var player, enemy;
 
 function preload(){
     backgroundIcon = loadImage("images/background.jpg");//icons
@@ -57,20 +57,35 @@ function setup() {
   tryAgainIcon.resize(buttonSizeX,buttonSizeY);
   console.log("ome");
   
+  playerSprite = createSprite(50,hh-75);
+  playerSprite.addImage(playerIcon);
+
   //TEXT SETTINGS
 textSize(50);
 fill(0);
 textFont(myFont);
 textAlign(CENTER);
+
+player = new PlayerSettings();
+enemy = new EnemySettings();
   }
   
   function draw() {
-    background(220);
+  //START COMMANDS
+  background(backgroundIcon);
+  fill(255);
+  textSize(35);
 
-  // if (drawGame){
-  //   playerSprite.collide(barSprite);
-  // }
-  
-  
+  player.show();
+  player.move();
+  if(keyDown('d')){
+    player.right();
+  } else if (keyDown('a')){
+      player.left();
+  } else if (keyDown('w')){
+  player.jump();
   }
+}
   
+
+ 
