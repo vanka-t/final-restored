@@ -1,4 +1,4 @@
-console.log("hellohohohooho wooooorld");
+console.log("server on tha run");
 
 
 var express = require('express');
@@ -20,7 +20,7 @@ var io = socket(server); //variable keeping track of inputs/outputs
 io.sockets.on('connection',newConnection);
 
 function newConnection(socket){ //callback
-    console.log(socket);
+    console.log("yay new connection!");
    
     socket.on('startGame', gameMsg);
 
