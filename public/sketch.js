@@ -18,6 +18,10 @@ var yPos = hh/2;
 var myFont;
 var points = 0;
 
+// var playerX = 100; //width and height of player
+// var playerY = 75;
+var enemyR = 70; //radius of enemy
+
 //BUTTON SETTINGS
 var xOffset, yOffset, overButton, locked, buttonSizeX, buttonSizeY; //adjustments for mousePressed for buttonYes/No
 buttonSizeX = 180;
@@ -69,11 +73,11 @@ function setup() {
   scoreGroup = new Group();
 
   enemyGroup = new Group(); //INTRODUCING ENEMY SPRITE
-  for(var i = 0; i<height-100; i+=55) { 
-    enemySprite = createSprite(0,i);
+  //for(var i = 0; i<height-100; i+=55) { 
+    enemySprite = createSprite(0,0, enemyR, enemyR);//i);
    enemySprite.addImage(enemyIcon);
    enemyGroup.add(enemySprite);
- }
+ //}
 
 
   //TEXT SETTINGS
@@ -104,15 +108,17 @@ enemies.push(new EnemySettings());
 
   //START COMMANDS
   background(backgroundIcon);
-  //CALLING ON TEXT
+//CALLING ON TEXT
   fill(255);
   textSize(35);
   text("Score      " + points, 100,50);
 
+//DISPLAY AND MOVE PLAYER
   player.show();
   player.move();
   player.stop();
-  //PLAYER COMMANDS
+
+//PLAYER COMMANDS
   if(keyDown('d')){
     player.right();
   } else if (keyDown('a')){
@@ -121,19 +127,35 @@ enemies.push(new EnemySettings());
   player.jump();
   }
 
-for (let e of enemies){
+//DISPLAY AND MOVE ENEMIES
+for (let e of enemies){ 
     e.show();
     e.move();
+    // if (player.hits(e)){
+    //     console.log("oopsiez");
+    //     //gameOver();
+    //    }
 }
 
 for (let e of enemies2){
     e.show2();
     e.move2();
+//     if()
+//     //  if (playerX == enemySprite.position.x){
+//    console.log("oopsiez");
+//      }
+    
+    //     //gameOver();
+    //    }
 }
 
 for (let e of enemies3){
     e.show3();
     e.move3();
+    if (player.hits(e)){
+        console.log("oopsiez");
+        //gameOver();
+       }
 }
 
 
