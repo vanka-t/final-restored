@@ -12,7 +12,7 @@ var port = process.env.PORT || 3000 //linking to local port
 //var server = app.listen(port);
 
 
-app.use(express.static('public'));
+app.use(express.static('public')); //to use public folder
 
 var socket = require('socket.io');
 
