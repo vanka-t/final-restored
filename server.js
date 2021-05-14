@@ -7,9 +7,9 @@ var express = require('express');
 // app = application
 var app = express(); //creating express app
 
- // var server = app.listen(3000);
-var port = process.env.PORT //|| 3000 //linking to local port
-var server = app.listen(port);
+  var server = app.listen(3000);
+var port = process.env.PORT || 3000 //linking to local port --comment ||3000 when using heroku
+//var server = app.listen(port);
 
 
 app.use(express.static('public')); //to use public folder

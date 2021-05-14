@@ -1,3 +1,5 @@
+const { text } = require("express");
+
 console.log("whazzaaaaaaap");
 
 var socket; //SERVER 
@@ -68,7 +70,7 @@ function setup() {
   // socket.on('startGame', newGame);
  
   socket = io.connect('https://final-acc.herokuapp.com/');
-  
+  text("hi lol", ww/2,hh/2);
  gameOver = true; //start off game
  updateSprites = false;
  enemyGroup = new Group();
@@ -103,7 +105,7 @@ for(var i=0; i<4; i++)
 // } 
 
 //PLAYER SETTINGS
-playerSprite = createSprite(50, height-75); //player
+playerSprite = createSprite(mouseX, mouseY);//50, height-75); //player
 playerSprite.addImage(playerIcon);
 drawSprite(playerSprite);
 playerSprite.position.x = 100
