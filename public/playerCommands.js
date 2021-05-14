@@ -17,17 +17,17 @@ class PlayerSettings{
   
     }
 
-    hits(enemy1){
-    return collideRectRect(this.x, this.y, this.r,this.yr, enemy1.x, enemy1.y, enemy1.r,enemy1.r);
+    hits(enemySprite){
+    return collideRectRect(this.x, this.y, this.r,this.yr, enemySprite.x, enemySprite.y, enemySprite.r,enemySprite.r);
      }
 
-     hits2(enemy2){
-        return collideRectRect(this.x, this.y, this.r,this.yr, enemy2.x, enemy2.y, enemy2.r,enemy2.r);
-      }
+    //  hits2(enemy2){
+    //     return collideRectRect(this.x, this.y, this.r,this.yr, enemy2.x, enemy2.y, enemy2.r,enemy2.r);
+    //   }
       
-     hits3(enemy3){
-            return collideRectRect(this.x, this.y, this.r,this.yr, enemy3.x, enemy3.y, enemy3.r,enemy3.r);
-     }
+    //  hits3(enemy3){
+    //         return collideRectRect(this.x, this.y, this.r,this.yr, enemy3.x, enemy3.y, enemy3.r,enemy3.r);
+    //  }
    
     //  hits(scoreSettings){ //if player hits shmoney, score goes up
     //  return collideRectRect(this.x, this.y, this.xr,this.xr, scoreSettings.x, scoreSettings.y, scoreSettings.r,scoreSettings.r);
@@ -54,8 +54,6 @@ class PlayerSettings{
       drawSprite(playerSprite);
       playerSprite.position.x = this.x;
       playerSprite.position.y = this.y;
-      
-  
       
     }
 

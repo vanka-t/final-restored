@@ -51,6 +51,10 @@ class EnemySettings{
      //   this.direction += 2;
     }
 
+stop(playerSprite){
+    this.x = playerSprite.x;
+    this.y = playerSprite.y;
 
+}
     
 }
