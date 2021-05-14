@@ -115,8 +115,9 @@ enemies.push(new EnemySettings());
 
 //DISPLAY AND MOVE PLAYER
   player.show();
+  
   player.move();
-  player.stop();
+
 
 //PLAYER COMMANDS
   if(keyDown('d')){
@@ -124,36 +125,34 @@ enemies.push(new EnemySettings());
   } else if (keyDown('a')){
       player.left();
   } else if (keyDown('w')){
-  player.jump();
+    player.jump();
+//   player.move();
   }
 
 //DISPLAY AND MOVE ENEMIES
 for (let e of enemies){ 
     e.show();
     e.move();
-    // if (player.hits(e)){
-    //     console.log("oopsiez");
-    //     //gameOver();
-    //    }
+    if (player.hits(e)){
+        console.log("oopsiez");
+        //gameOver();
+       }
 }
 
 for (let e of enemies2){
     e.show2();
     e.move2();
-//     if()
-//     //  if (playerX == enemySprite.position.x){
-//    console.log("oopsiez");
-//      }
-    
-    //     //gameOver();
-    //    }
+    if (player.hits2(e)){
+        console.log("oopsiez2");
+        //gameOver();
+       }
 }
 
 for (let e of enemies3){
     e.show3();
     e.move3();
-    if (player.hits(e)){
-        console.log("oopsiez");
+    if (player.hits3(e)){
+        console.log("oopsiez3");
         //gameOver();
        }
 }

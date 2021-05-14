@@ -2,10 +2,10 @@ class PlayerSettings{
     constructor(){
    
       this.x = 50;
-      this.y = height-this.xr;
+      this.y = height-100;
       this.vy = 0;
       this.gravity = 0.7; //velocity when pulled back to ground
-      this.xr = 100; //player size
+      this.r = 100; //player size
       this.yr = 75;
     }
   
@@ -17,14 +17,16 @@ class PlayerSettings{
   
     }
 
-    hits(enemySettings){
-    //     var x1 = this.x + this.xr * 0.5;
-    //     var y1 = this.y + this.xr * 0.5;
-    //     var x2 = enemySettings.x + enemySettings.r * 0.5;
-    //    var y2 = enemySettings.y + enemySettings.r * 0.5;
-    //       return collideRectRect(x1, y1, this.xr,this.xr,  x2, y2, enemySettings.r,enemySettings.r);
-   
-    return collideRectRect(this.x, this.y, this.xr,this.yr, enemySettings.x, enemySettings.y, enemySettings.r,enemySettings.r);
+    hits(enemy1){
+    return collideRectRect(this.x, this.y, this.r,this.yr, enemy1.x, enemy1.y, enemy1.r,enemy1.r);
+     }
+
+     hits2(enemy2){
+        return collideRectRect(this.x, this.y, this.r,this.yr, enemy2.x, enemy2.y, enemy2.r,enemy2.r);
+      }
+      
+     hits3(enemy3){
+            return collideRectRect(this.x, this.y, this.r,this.yr, enemy3.x, enemy3.y, enemy3.r,enemy3.r);
      }
    
     //  hits(scoreSettings){ //if player hits shmoney, score goes up
@@ -34,7 +36,7 @@ class PlayerSettings{
     move(){
       this.y += this.vy;
       this.vy += this.gravity;
-      this.y = constrain(this.y, 0, height - this.xr); //player can only go from ground level to 'roof'
+      this.y = constrain(this.y, 0, height - this.yr); //player can only go from ground level to 'roof'
       this.x = constrain(this.x, 0, width); //player can only go from ground level to 'roof'
   
     }

@@ -2,7 +2,7 @@ class EnemySettings{
     constructor(){
         this.x = 200;
         this.y = 0;
-        this.r = enemyR;
+        this.r = 70;
 
     }
 
