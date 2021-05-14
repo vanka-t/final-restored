@@ -64,7 +64,7 @@ myFont = loadFont("assets/ARCADECLASSIC.TTF") //font
 
 function setup() {
   createCanvas(ww, hh);
-  socket = io.connect('https://localhost:3000');
+  socket = io.connect('http://localhost:3000');
   // socket.on('startGame', newGame);
  
   //socket = io.connect('https://hw7-drawing-time.herokuapp.com/');
@@ -260,8 +260,7 @@ function newGame() {
   }
 
   //COLLECTING SCORE FUNCTION
-  function collect(collector, collected) //COLLECTOR == PLAYER
-{
+  function collect(collector, collected){ //COLLECTOR == PLAYER
   collector.position.x +=1;
   collected.remove();
   points ++;
