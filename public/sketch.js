@@ -1,37 +1,34 @@
-const { text } = require("express");
+//const { text } = require("express");
 
 console.log("whazzaaaaaaap");
 
 var socket; //SERVER 
 
-var player; //class objects
-var enemyGroup;
-var enemy3;
-var scoreGroup;
+var player, enemy3; //class objects
+var enemyGroup, scoreGroup, barGroup; //SPRITE GROUPS
 
-var barGroup;
 
-var enemySprite, playerSprite, barSprite, scoreSprite;
+var enemySprite, playerSprite, barSprite, scoreSprite; //SPRITES
 
 var locked = false; //
 
-var scores = [];
+var scores = []; 
 var enemies = [];
 var enemies2 = [];
 var enemies3 = [];
 var bars = [];
 
-var backgroundIcon, scoreIcon, playerIcon, barIcon, enemyIcon;
+var backgroundIcon, scoreIcon, playerIcon, barIcon, enemyIcon; //IMAGES
 var gameOverIcon, tryAgainIcon, cursorIcon;
 
-var GRAVITY = 1;
+var gravity = 1;
 var direction = 90;
 var points = 0;
 var ww = 1000;
 var hh = 500;
 var xPos = ww/2; //controlling position for all text icons
 var yPos = hh/2;
-var paused = false; // will be used to pause
+//var paused = false; // will be used to pause
 
 var myFont;
 
@@ -66,19 +63,19 @@ myFont = loadFont("assets/ARCADECLASSIC.TTF") //font
 
 function setup() {
   createCanvas(ww, hh);
-  //socket = io.connect('http://localhost:3000');
+  socket = io.connect('http://localhost:3000');
   // socket.on('startGame', newGame);
  
-  socket = io.connect('https://final-acc.herokuapp.com/');
-  text("hi lol", ww/2,hh/2);
- gameOver = true; //start off game
- updateSprites = false;
+ // socket = io.connect('https://final-acc.herokuapp.com/');
+
+// gameOver = true; //start off game
+// updateSprites = false;
  enemyGroup = new Group();
 scoreGroup = new Group();
 
 scoreIcon.resize(20,20);
 cursorIcon.resize(40,40);
-playerIcon.resize(75,75);
+playerIcon.resize(100,75);
 barIcon.resize(150,50);
 enemyIcon.resize(70,70);
 gameOverIcon.resize(400,270);
@@ -87,7 +84,6 @@ console.log("ome");
 
 //CREATING SPRITES
 barGroup = new Group();
-
 for(var i=0; i<4; i++)
 {
   barSprite = createSprite(random(150, width), random(height-150, 0));
@@ -105,10 +101,9 @@ for(var i=0; i<4; i++)
 // } 
 
 //PLAYER SETTINGS
-playerSprite = createSprite(mouseX, mouseY);//50, height-75); //player
+playerSprite = createSprite(50, hh-75);//50, height-75); //player
 playerSprite.addImage(playerIcon);
-drawSprite(playerSprite);
-playerSprite.position.x = 100
+
 
 
 
@@ -133,77 +128,99 @@ textFont(myFont);
 textAlign(CENTER);
 
 //COLLISION SETTINGS
-frameRate(60);
+//frameRate(60);
 }
 
 
 
 function draw() {
-  //STARTUP COMMANDS
+  //START COMMANDS
   background(backgroundIcon);
   fill(255);
   textSize(35);
+drawSprites();
+  //DEFAULT SETTING
+  playerSprite.velocity.y = 0; //y settings
+  playerSprite.position.y = hh-75;
+
+   //x settings
+  playerSprite.position.x = 100;
+  playerSprite.position.x += playerSprite.velocity.x;
 
 //RESTARTING GAME
-if(gameOver && mouseWentDown(tryAgainIcon)){
+if(mouseWentDown(tryAgainIcon)){//(gameOver == false && mouseWentDown(tryAgainIcon)){
   //locked = true;
   newGame();
   console.log("oooooooooooh yeaaaaah");
-} else if (!gameOver) {
+} else { //DEFAULT GAME
 
 //PLAYER CONTROLS
 //playerSprite.position.x += 5;
 if(keyDown('d')){
-  playerSprite.position.x += 5;
-  playerSprite.velocity.x = -4;
+  playerSprite.position.x -= 10;
 } 
 if (keyDown('a')){
-  playerSprite.position.x -= 5;
-  playerSprite.velocity.x = 4;
+  playerSprite.velocity.x = -10;
 } 
 if (keyDown('w')){
-
-  //PHYSICS OF JUMPING/MOVING
-  //playerSprite.position.y -= 55 + playerSprite.velocity.y;//playerSprite.velocity.y;
-  playerSprite.velocity.y -= 7; //goes up
-  playerSprite.velocity.y += GRAVITY; //falls
-  if (playerSprite.position.y<308){ //restricts to only double jump
-    playerSprite.velocity.y += 10;
-    playerSprite.position.x += 5; //velocity of jump
-     
-  }
+    //PHYSICS OF JUMPING/MOVING
+  //playerSprite.position.y = 
+  playerSprite.addSpeed(-25,90);
+  // playerSprite.velocity.y += gravity;
+  // playerSprite.velocity.y = -5;
   
+
+
+  // playerSprite.position.y -= 1 + playerSprite.velocity.y;//playerSprite.velocity.y;
+  // playerSprite.velocity.y -= 4;
+
+  // if (playerSprite.position.y < 291){ //restricts to only double jump
+  //   playerSprite.velocity.y += 5;
+  //   playerSprite.position.y += 1;
+
+  //   //playerSprite.velocity.y += gravity; //falls
+  //  // playerSprite.position.x += 5; //velocity of jump
+     
+  // }
+}
   if (keyDown('s')){
-    playerSprite.velocity.y += 7; //goes down
+    playerSprite.velocity.y = 0;
+   // playerSprite.velocity.y += 7; //goes down
+    playerSprite.position.y += 5;
+
+    if (playerSprite.position.y>height-75){ //restricts to only double jump
+      playerSprite.position.y = height-75;
+      //playerSprite.velocity.y += gravity; //falls     
+    }
   } 
 
-}
+
 
 playerSprite.overlap(scoreGroup, collect); //COLLECTING MONEY
 
 //BIG BOUNDING BOX
-for(var i=0; i<allSprites.length; i++) {
-  var s = allSprites[i];
-  if(s.position.x<0) {
-    s.position.x = 1;
-    s.velocity.x = abs(s.velocity.x);
-  }
+// for(var i=0; i<allSprites.length; i++) {
+//   var s = allSprites[i];
+//   if(s.position.x<0) {
+//     s.position.x = 1;
+//    // s.velocity.x = abs(s.velocity.x);
+//   }
 
-  if(s.position.x>width) {
-    s.position.x = width-1;
-    s.velocity.x = -abs(s.velocity.x);
-  }
+//   if(s.position.x>width) {
+//     s.position.x = width-1;
+//    // s.velocity.x = -abs(s.velocity.x);
+//   }
 
-  if(s.position.y<0) {
-    s.position.y = 1;
-    s.velocity.y = abs(s.velocity.y);
-  }
+//   if(s.position.y<0) {
+//     s.position.y = 1;
+//    // s.velocity.y = abs(s.velocity.y);
+//   }
 
-  if(s.position.y>height) {
-    s.position.y = height-1;
-    s.velocity.y = -abs(s.velocity.y);
-  }
-}
+//   if(s.position.y>height) {
+//     s.position.y = height-1;
+//    // s.velocity.y = -abs(s.velocity.y);
+//   }
+// }
 
 //CALLING ON TEXT
 text("Score      " + points, 100,50);
@@ -221,16 +238,18 @@ if(random(1) <0.01){ //spikes showing up irregularly -->decimal value = probabil
 }
 
 playerSprite.collide(barGroup);
-enemyGroup.overlap(playerSprite, gameOver);//if enemy + player touch, its game over
+if (enemyGroup.overlap(playerSprite)){
+  gameOver();
+};//, gameOver);//if enemy + player touch, its game over
 //   }
  
 
 
-playerSprite.velocity.y = 0;
+
 //playerSprite.position.y = height-75;
-// if(playerSprite.bounce(barGroup)){
-//   playerSprite.velocity.y += GRAVITY;
-// }
+ if(playerSprite.bounce(barGroup)){
+   //playerSprite.velocity.y += gravity;
+ }
 //CURSOR
 
 
@@ -246,9 +265,9 @@ if(random(1) <0.01){ //spikes showing up irregularly -->decimal value = probabil
 
 
 function newGame() {
-  enemyGroup.removeSprites();
-  gameOver = false;
-  updateSprites = true;
+  //enemyGroup.removeSprites();
+  //gameOver = true;
+  //updateSprites = true;
   playerSprite.position.x =   50;
   playerSprite.position.y = height-75;
   playerSprite.velocity.y = 0;
@@ -268,9 +287,3 @@ function newGame() {
   points ++;
 }
 
-function newGame(data){
-  fill(data.colorz1,data.colorz2,data.colorz3,1);
-ellipse(data.x, data.y, data.slidersc, data.lol);
-
-  socket.emit('startGame', data);
-}
