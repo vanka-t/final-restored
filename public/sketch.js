@@ -3,16 +3,13 @@ console.log("whazzaaaaaaap");
 var socket; //SERVER 
 
 var player; //class objects
-var enemySprite;
 var enemyGroup;
 var enemy3;
 var scoreGroup;
 
 var barGroup;
 
-var playerSprite; 
-var barSprite;
-var scoreSprite;
+var enemySprite, playerSprite, barSprite, scoreSprite;
 
 var locked = false; //
 
@@ -22,14 +19,8 @@ var enemies2 = [];
 var enemies3 = [];
 var bars = [];
 
-var backgroundIcon;
-var scoreIcon;
-var playerIcon; //icons
-var barIcon;
-var enemyIcon;
-var gameOverIcon;
-var tryAgainIcon;
-var cursorIcon;
+var backgroundIcon, scoreIcon, playerIcon, barIcon, enemyIcon;
+var gameOverIcon, tryAgainIcon, cursorIcon;
 
 var GRAVITY = 1;
 var direction = 90;
@@ -58,8 +49,8 @@ console.log("all ready to play babey !");
 
 
 function preload(){
-  backgroundIcon = loadImage("images/background.jpg");//icons
-  scoreIcon = loadImage("images/shmoney.png"); 
+backgroundIcon = loadImage("images/background.jpg");//icons
+scoreIcon = loadImage("images/shmoney.png"); 
 playerIcon = loadImage("images/bikerKween.png"); 
 barIcon = loadImage("images/brickwall.jpg");
 enemyIcon = loadImage("images/fire.png");
@@ -74,12 +65,12 @@ myFont = loadFont("assets/ARCADECLASSIC.TTF") //font
 function setup() {
   createCanvas(ww, hh);
   socket = io.connect('https://localhost:3000');
-  socket.on('startGame', newGame);
+  // socket.on('startGame', newGame);
  
   //socket = io.connect('https://hw7-drawing-time.herokuapp.com/');
   
  gameOver = true; //start off game
- updateSprites(false);
+ updateSprites = false;
  enemyGroup = new Group();
 scoreGroup = new Group();
 
@@ -255,7 +246,7 @@ if(random(1) <0.01){ //spikes showing up irregularly -->decimal value = probabil
 function newGame() {
   enemyGroup.removeSprites();
   gameOver = false;
-  updateSprites(true);
+  updateSprites = true;
   playerSprite.position.x =   50;
   playerSprite.position.y = height-75;
   playerSprite.velocity.y = 0;

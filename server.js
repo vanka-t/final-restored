@@ -22,11 +22,11 @@ io.sockets.on('connection',newConnection);
 function newConnection(socket){ //callback
     console.log("yay new connection!");
    
-    socket.on('startGame', gameMsg);
+    // socket.on('startGame', gameMsg);
 
-    function gameMsg(data){
-        //  console.log(data);
-        socket.broadcast.emit('startGame', data);
-        }
+    // function gameMsg(data){
+    //     //  console.log(data);
+    //     socket.broadcast.emit('startGame', data);
+    //     }
 
 }   
