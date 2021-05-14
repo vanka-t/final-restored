@@ -1,6 +1,6 @@
 console.log("whazzaaaaaaap");
 
-
+var socket; //SERVER 
 
 var player; //class objects
 var enemySprite;
@@ -54,6 +54,9 @@ var gameOver;
 
 console.log("all ready to play babey !");
 
+
+
+
 function preload(){
   backgroundIcon = loadImage("images/background.jpg");//icons
   scoreIcon = loadImage("images/shmoney.png"); 
@@ -70,7 +73,11 @@ myFont = loadFont("assets/ARCADECLASSIC.TTF") //font
 
 function setup() {
   createCanvas(ww, hh);
+  socket = io.connect('https://localhost:3000');
+  socket.on('startGame', newGame);
  
+  //socket = io.connect('https://hw7-drawing-time.herokuapp.com/');
+  
  gameOver = true; //start off game
  updateSprites(false);
  enemyGroup = new Group();
@@ -267,4 +274,11 @@ function newGame() {
   collector.position.x +=1;
   collected.remove();
   points ++;
+}
+
+function newGame(data){
+  fill(data.colorz1,data.colorz2,data.colorz3,1);
+ellipse(data.x, data.y, data.slidersc, data.lol);
+
+  socket.emit('startGame', data);
 }
