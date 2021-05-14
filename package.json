@@ -1,10 +1,10 @@
 {
   "name": "final-restored",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,10 @@
   },
   "homepage": "https://github.com/vanka-t/final-restored#readme",
   "dependencies": {
-    "ml5": "^1.0.0"
-  }
+    "express": "^4.17.1",
+    "ml5": "^1.0.0",
+    "socket.io": "^4.1.1"
+  },
+  "devDependencies": {},
+  "description": ""
 }
