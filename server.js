@@ -8,7 +8,7 @@ var express = require('express');
 var app = express(); //creating express app
 
  // var server = app.listen(3000);
-var port = process.env.PORT || 3000 //linking to local port
+var port = process.env.PORT //|| 3000 //linking to local port
 var server = app.listen(port);
 
 

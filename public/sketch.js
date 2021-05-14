@@ -64,10 +64,10 @@ myFont = loadFont("assets/ARCADECLASSIC.TTF") //font
 
 function setup() {
   createCanvas(ww, hh);
-  socket = io.connect('http://localhost:3000');
+  //socket = io.connect('http://localhost:3000');
   // socket.on('startGame', newGame);
  
-  //socket = io.connect('https://hw7-drawing-time.herokuapp.com/');
+  socket = io.connect('https://final-acc.herokuapp.com/');
   
  gameOver = true; //start off game
  updateSprites = false;
